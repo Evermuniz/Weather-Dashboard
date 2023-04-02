@@ -10,16 +10,29 @@ function coordinates (search) {
     })
     .then(function (data){
     console.log(data);
-})
+    weather(data[0]);
+})}
 
 
-fetch(`https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=f6302d4de9dd9a1785f80b5cb10cfdfc`)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-  });}
+function weather (location) {
+  var lat = location.lat;
+  var lon = location.lon;
+  var city = location.name;
+
+  var weatherAPI = apiURL + '/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + apiKey;
+  fetch(weatherAPI)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+}
+
+function getWeather() {
+    var search = document.querySelector("#city").value;
+    coordinates(search);
+}
 
 
-button.addEventListener('click', coordinates);
+button.addEventListener('click', getWeather);
