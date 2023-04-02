@@ -54,6 +54,7 @@ function displayWeather(city, data) {
   var humidityData = document.createElement("p");
 
   icon.setAttribute("src", image);
+  icon.setAttribute('class', 'image');
   title.textContent = city;
   tempData.textContent = "Temperature: " + temp + "°F";
   windData.textContent = "Wind Speed: " + wind + " MPH";
