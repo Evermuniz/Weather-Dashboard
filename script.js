@@ -44,9 +44,11 @@ function items(city, data) {
 
 function displayWeather(city, data) {
   var image = "https://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
+  var description = data.weather[0].description;
   var temp = data.main.temp;
   var wind = data.wind.speed;
   var humidity = data.main.humidity;
+  var todaysDate = dayjs(data.weather[0].dt_text).format('M/D/YYYY');
 
   var container = document.createElement("div");
   var tempData = document.createElement("p");
@@ -55,13 +57,26 @@ function displayWeather(city, data) {
 
   icon.setAttribute("src", image);
   icon.setAttribute('class', 'image');
-  title.textContent = city;
+  icon.setAttribute('alt', description);
+  title.textContent = city +' ' + todaysDate;
   tempData.textContent = "Temperature: " + temp + "°F";
   windData.textContent = "Wind Speed: " + wind + " MPH";
   humidityData.textContent = "Humidity " + humidity + " %";
 
   main.appendChild(container);
   container.append(tempData, windData, humidityData);
+};
+
+function fiveDayForecast () {
+
+
+
 }
+
+
+
+
+
+
 
 button.addEventListener("click", getWeather);
