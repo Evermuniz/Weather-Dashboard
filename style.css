@@ -1,29 +1,29 @@
-:root {
+:root { /*using root colors to create a gradient header background, used eyedropper to try to match the mock up*/
     --primary: rgba(71, 86, 184, 72);
     --secondary: rgba(39, 20, 97, 38);
 }
 
 
 
-.img {
+.img { /*class assigned to weather icons for a fixed size*/
     width: 50px;
     height: 50px;
 }
 
-#fiveDayText {
+#fiveDayText { /*class used for styling the "5-Day Forecast" text*/
     font-weight: bold;
     margin-top: 20px;
     margin-left: 5px;
 }
 
-header {
+header { /*background color for header, text color and positioning for header text*/
     background-image: linear-gradient(to right, var(--primary), var(--secondary));
     color: white;
     align-items: center;
     
 }
 
-#fiveDay {
+#fiveDay { /*setting the future forecast cards' text smaller*/
     font-size: small;
 }
 
