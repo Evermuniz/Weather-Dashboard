@@ -1,7 +1,7 @@
 var apiURL = "https://api.openweathermap.org";
 var apiKey = "f6302d4de9dd9a1785f80b5cb10cfdfc";
 var button = document.querySelector("#submission");
-var input = document.querySelector('#city');
+var input = document.querySelector("#city");
 var main = document.querySelector("#main");
 var forecast = document.querySelector("#forecast");
 var title = document.querySelector("#current");
@@ -63,6 +63,7 @@ function getWeather() {
 
   var search = document.querySelector("#city").value;
   coordinates(search);
+      input.value = "";
 }
 
 function items(city, data) {
@@ -129,8 +130,9 @@ function fiveDayForecast(data) {
 }
 
 function history(city) {
+    if (!searched.includes(city)) {
   searched.push(city);
-  localStorage.setItem("city", JSON.stringify(searched));
+  localStorage.setItem("city", JSON.stringify(searched));}
   saved.innerHTML='';
   displayHistory();
 }
