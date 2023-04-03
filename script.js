@@ -6,8 +6,10 @@ var title = document.querySelector("#current");
 var icon = document.querySelector("#icon");
 var fiveDayContainer = document.querySelector("#fiveDay");
 var date = dayjs().format('M/D/YYYY');
+var input = document.querySelector("#input");
+var fiveDay = document.querySelector("#fiveDayText");
 var searched = [];
-var historyButton = document.querySelector('.history');
+
 
 
 function displayHistory () {
@@ -19,7 +21,7 @@ function displayHistory () {
     for (var i = 0; i<searched.length; i++){
     var items = document.createElement("button");
     items.textContent=searched[i];
-    main.append(items);
+    input.append(items);
     items.setAttribute("class", history);
     items.addEventListener("click", function(){
         var city = this.textContent;
@@ -70,6 +72,7 @@ function items(city, data) {
 }
 
 function displayWeather(city, data) {
+    
   var image = "https://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
   var description = data.weather[0].description;
   var temp = data.main.temp;
@@ -83,18 +86,20 @@ function displayWeather(city, data) {
   var humidityData = document.createElement("p");
 
   icon.setAttribute("src", image);
-  icon.setAttribute("class", "image");
+  icon.setAttribute("class", "img");
   icon.setAttribute("alt", description);
-  title.textContent = city + " " + todaysDate;
+  container.setAttribute('class', 'p-3');
+  title.textContent = city + " " + '(' + todaysDate + ')';
   tempData.textContent = "Temperature: " + temp + "°F";
   windData.textContent = "Wind Speed: " + wind + " MPH";
-  humidityData.textContent = "Humidity " + humidity + " %";
+  humidityData.textContent = "Humidity: " + humidity + " %";
 
   main.appendChild(container);
   container.append(tempData, windData, humidityData);
 }
 
 function fiveDayForecast(data) {
+fiveDay.textContent = "5-Day Forecast: ";
   for (var i = 1; i < 6; i++) {
 
    var image = "https://openweathermap.org/img/wn/" + data[i].weather[0].icon + ".png";
@@ -112,12 +117,13 @@ function fiveDayForecast(data) {
     var humidityData = document.createElement("p");
 
     dateText.textContent = future;
-    card.setAttribute('class', 'cards')
+    card.setAttribute('class', 'card col-2 m-2');
     fiveIcon.setAttribute('src', image);
+    fiveIcon.setAttribute('class', 'img');
     fiveIcon.setAttribute('alt', description);
-    tempData.textContent = "Temperature: " + temp + "°F";
-    windData.textContent = "Wind Speed: " + wind + " MPH";
-    humidityData.textContent = "Humidity " + humidity + " %";
+    tempData.textContent = "Temp: " + temp + "°F";
+    windData.textContent = "Wind: " + wind + " MPH";
+    humidityData.textContent = "Humidity: " + humidity + " %";
 
     fiveDayContainer.appendChild(card);
     card.append(dateText, fiveIcon, tempData, windData, humidityData);
@@ -129,12 +135,6 @@ function history (city) {
     localStorage.setItem("city", JSON.stringify(searched))
 
 };
-
-function renderHistory () {
-
-
-}
-
 
 button.addEventListener("click", getWeather);
 displayHistory();
