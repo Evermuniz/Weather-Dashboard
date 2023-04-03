@@ -6,6 +6,28 @@ var title = document.querySelector("#current");
 var icon = document.querySelector("#icon");
 var fiveDayContainer = document.querySelector("#fiveDay");
 var date = dayjs().format('M/D/YYYY');
+var searched = [];
+var historyButton = document.querySelector('.history');
+
+
+function displayHistory () {
+    var list = localStorage.getItem("city");
+    if (list){
+        searched = JSON.parse(list);
+    }
+
+    for (var i = 0; i<searched.length; i++){
+    var items = document.createElement("button");
+    items.textContent=searched[i];
+    main.append(items);
+    items.setAttribute("class", history);
+    items.addEventListener("click", function(){
+        var city = this.textContent;
+        coordinates(city);
+    });
+}}
+
+
 
 function coordinates(search) {
   var coord = apiURL + "/geo/1.0/direct?q=" + search + "&limit=5&appid=" + apiKey;
@@ -17,6 +39,7 @@ function coordinates(search) {
       console.log(data);
       weather(data[0]);
     });
+  
 }
 
 function weather(search) {
@@ -33,6 +56,7 @@ function weather(search) {
       items(city, data);
       console.log(data);
     });
+      history(city);
 }
 
 function getWeather() {
@@ -74,7 +98,7 @@ function fiveDayForecast(data) {
   for (var i = 1; i < 6; i++) {
 
    var image = "https://openweathermap.org/img/wn/" + data[i].weather[0].icon + ".png";
-    //   var description = data[i].weather[0].description;
+    var description = data[i].weather[0].description;
     var temp = data[i].main.temp;
     var wind = data[i].wind.speed;
     var humidity = data[i].main.humidity;
@@ -88,7 +112,9 @@ function fiveDayForecast(data) {
     var humidityData = document.createElement("p");
 
     dateText.textContent = future;
+    card.setAttribute('class', 'cards')
     fiveIcon.setAttribute('src', image);
+    fiveIcon.setAttribute('alt', description);
     tempData.textContent = "Temperature: " + temp + "°F";
     windData.textContent = "Wind Speed: " + wind + " MPH";
     humidityData.textContent = "Humidity " + humidity + " %";
@@ -98,4 +124,18 @@ function fiveDayForecast(data) {
   }
 }
 
+function history (city) {
+    searched.push(city);
+    localStorage.setItem("city", JSON.stringify(searched))
+
+};
+
+function renderHistory () {
+
+
+}
+
+
 button.addEventListener("click", getWeather);
+displayHistory();
+
