@@ -73,7 +73,7 @@ function displayWeather(city, data) {
 function fiveDayForecast(data) {
   for (var i = 1; i < 6; i++) {
 
-   // var image = "https://openweathermap.org/img/wn/" + data.weather[i].icon + ".png";
+   var image = "https://openweathermap.org/img/wn/" + data[i].weather[0].icon + ".png";
     //   var description = data[i].weather[0].description;
     var temp = data[i].main.temp;
     var wind = data[i].wind.speed;
@@ -81,19 +81,20 @@ function fiveDayForecast(data) {
     var future = dayjs().add(i, 'day').format('M/D/YYYY');
 
     var card = document.createElement("div");
+    var fiveIcon = document.createElement('img');
     var dateText = document.createElement("h4");
     var tempData = document.createElement("p");
     var windData = document.createElement("p");
     var humidityData = document.createElement("p");
 
     dateText.textContent = future;
-
+    fiveIcon.setAttribute('src', image);
     tempData.textContent = "Temperature: " + temp + "°F";
     windData.textContent = "Wind Speed: " + wind + " MPH";
     humidityData.textContent = "Humidity " + humidity + " %";
 
     fiveDayContainer.appendChild(card);
-    card.append(dateText, tempData, windData, humidityData);
+    card.append(dateText, fiveIcon, tempData, windData, humidityData);
   }
 }
 
