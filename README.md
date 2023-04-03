@@ -24,7 +24,7 @@ The Weather Dashboard allows you to search for a city and view current temperatu
 - Bootstrap library used to build most of the HTML file
 - Bootstrap library used to add most class properties 
 - No initial code was provided
-- References used to build the JavaScript code was provided by the U of U Coding Bootcamp and various online sources 
+- References used to build the JavaScript code were provided by the U of U Coding Bootcamp and various online sources 
 
 ## License
 
