@@ -151,5 +151,5 @@ function history(city) {
   displayHistory(); //run the displayHistory function
 };
 
-button.addEventListener("click", getWeather); //add event listener to the search button and trigger the getWeather function
+button.addEventListener('click', getWeather); //add event listener to the search button and trigger the getWeather function
 displayHistory(); //run the display history to show history without searching for a city
